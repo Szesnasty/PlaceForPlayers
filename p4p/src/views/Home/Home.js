@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+
 import HomeWrapper from 'components/HomeWrapper/HomeWrapper';
 import List from 'components/List/List';
 

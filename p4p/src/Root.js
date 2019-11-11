@@ -5,8 +5,10 @@ import {
   Route
 } from "react-router-dom";
 
-import Home from 'views/Home/Home'
-import DetailsPage from 'views/DetailsPage/DetailsPage'
+import Home from 'views/Home/Home';
+import DetailsPage from 'views/DetailsPage/DetailsPage';
+
+// https://api.rawg.io/docs/
 
 class Root extends Component {
   state = {  }
