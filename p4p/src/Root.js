@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import Home from 'views/Home/Home'
+import DetailsPage from 'views/DetailsPage/DetailsPage'
 
 class Root extends Component {
   state = {  }
@@ -18,7 +19,14 @@ class Root extends Component {
           </Route>
         </Switch>
         <Switch>
-          <Route exact path="/details/:id"><h1>Details of game</h1></Route>
+          <Route 
+              exact 
+              path="/details/:id" 
+              render={props => (
+                <DetailsPage {...props} />
+                )
+              }
+          />
         </Switch>
       </Router>
      );

@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+    Link
+  } from "react-router-dom";
+
 import Card from 'components/Card/Card'
 
 import 'components/ListItems/ListItems.scss'
@@ -14,14 +18,16 @@ const ListItems = (props) => {
     }=props;
     return ( 
         <li className="listItem">
-            <Card 
-                backgroundIimage={backgroundIimage}
-                clip={clip}
-                genres={genres}
-                id={id} 
-                name={name} 
-                shortScreenshots={shortScreenshots}
-            />
+            <Link to={`/details/${id}`}>
+                <Card 
+                    backgroundIimage={backgroundIimage}
+                    clip={clip}
+                    genres={genres}
+                    id={id} 
+                    name={name} 
+                    shortScreenshots={shortScreenshots}
+                />
+            </Link>
         </li>
      );
 }
