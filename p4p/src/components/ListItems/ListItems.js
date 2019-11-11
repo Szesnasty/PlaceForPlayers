@@ -18,7 +18,7 @@ const ListItems = (props) => {
     }=props;
     return ( 
         <li className="listItem">
-            <Link to={`/details/${id}`}>
+            <Link target="_blank" to={`/details/${id}`}>
                 <Card 
                     backgroundIimage={backgroundIimage}
                     clip={clip}
