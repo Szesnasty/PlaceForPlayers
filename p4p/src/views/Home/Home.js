@@ -4,6 +4,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import HomeWrapper from 'components/HomeWrapper/HomeWrapper';
 import List from 'components/List/List';
+import Loading from 'components/Loading/Loading'
+import Modal from 'components/Modal/Modal'
 
 class Home extends Component {
     state = { 
@@ -11,11 +13,16 @@ class Home extends Component {
         // startPage: 1,
         // sizeOfFirstPage: 10,
 
-
         currentPage:1,
-        pageSize: 20
+        pageSize: 20,
+
+        isModal: false,
+        modalContent: ''
         
      }
+    
+     modalRef = React.createRef();
+
     componentDidMount(){
         this.getInitData();
        
@@ -36,6 +43,25 @@ class Home extends Component {
           })
     };
 
+    handleShowModal=(e)=>{
+
+        const singleGameObject=this.state.listOfGames.filter(singleGameDetails => singleGameDetails.id === e)
+        this.setState({
+            isModal: true,
+            modalContent: singleGameObject
+        }) 
+      
+    }
+
+    handleCloseModal=e=>{
+        e.stopPropagation();
+        if(e.target===this.modalRef.current){
+            this.setState({
+                isModal: false
+            })
+        }
+    }
+
 
     fetchData = () => {
         const { currentPage, pageSize } = this.state;
@@ -47,10 +73,9 @@ class Home extends Component {
             .then(response =>
                 this.setState({ 
                     listOfGames: [...this.state.listOfGames].concat(response.data.results) ,
-                    // currentPage: currentPage + 1
                 })
             );
-        }, 1000);
+        }, 4000);
 
         return () => {
             clearTimeout(timer);
@@ -58,20 +83,29 @@ class Home extends Component {
       };
 
     render() { 
-        console.log(this.state)
-        const {listOfGames}=this.state;
        
+        const {listOfGames, isModal}=this.state;
+       console.log(this.state)
         return (
+            <>
             <HomeWrapper>    
                 <InfiniteScroll
                     dataLength={listOfGames.length}
                     next={this.fetchData}
                     hasMore={true}
-                    loader={<h4>Loading...</h4>}
+                    loader={<Loading />}
                 >
-                    <List data={listOfGames}  />
+                    <List onClick={(e)=>this.handleShowModal(e)} isModal={isModal} data={listOfGames}  >
+
+                    </List>
+                    
                 </InfiniteScroll>
+                
             </ HomeWrapper >
+            {isModal ? <Modal modalRef={this.modalRef} onClick={e=>this.handleCloseModal(e)} modalContent={this.state.modalContent} /> : null}
+            </>
+
+          
        
         );
     }

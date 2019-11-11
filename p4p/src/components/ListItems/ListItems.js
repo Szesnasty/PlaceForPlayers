@@ -3,9 +3,10 @@ import {
     Link
   } from "react-router-dom";
 
-import Card from 'components/Card/Card'
+import Card from 'components/Card/Card';
+import Modal from 'components/Modal/Modal';
 
-import 'components/ListItems/ListItems.scss'
+import 'components/ListItems/ListItems.scss';
 
 const ListItems = (props) => {
     const {
@@ -14,21 +15,27 @@ const ListItems = (props) => {
         genres,
         id,
         name,
+        onClick,
+        platforms,
         shortScreenshots
     }=props;
-    return ( 
-        <li className="listItem">
-            <Link target="_blank" to={`/details/${id}`}>
-                <Card 
-                    backgroundIimage={backgroundIimage}
-                    clip={clip}
-                    genres={genres}
-                    id={id} 
-                    name={name} 
-                    shortScreenshots={shortScreenshots}
-                />
-            </Link>
-        </li>
+    return (
+        <>
+
+            <li  onClick={(e)=>onClick(id)} className="listItem">
+                {/* <Link target="_blank" to={`/details/${id}`}> */}
+                    <Card 
+                        backgroundIimage={backgroundIimage}
+                        clip={clip}
+                        genres={genres}
+                        id={id} 
+                        name={name} 
+                        platforms={platforms}
+                        shortScreenshots={shortScreenshots}
+                    />
+                {/* </Link> */}
+            </li>
+        </>
      );
 }
  

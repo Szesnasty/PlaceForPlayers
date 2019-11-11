@@ -1,10 +1,17 @@
 .listItem{
+    transition: 0.4s;
     width: 32%;
     min-height: 380px;
 
-    -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.75);
+
+
+    // background: rgb(2,0,36);
+    // background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 35%, rgba(0,101,121,1) 100%);
 
     margin-top: 32px;
+}
+
+
+.listItem:hover{
+    transform: scale(1.05);
 }
