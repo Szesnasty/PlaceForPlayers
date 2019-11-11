@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import HomeWrapper from 'components/HomeWrapper/HomeWrapper';
+import List from 'components/List/List';
+
 class Home extends Component {
     state = { 
         listOfGames: []
@@ -22,8 +25,15 @@ class Home extends Component {
     }
 
     render() { 
+        console.log(this.state)
+        const {listOfGames}=this.state;
        
-        return ( <h1></h1> );
+        return (
+            <HomeWrapper>    
+                <List data={listOfGames}  />
+            </ HomeWrapper >
+       
+        );
     }
 }
  
