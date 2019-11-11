@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+
+import Home from 'views/Home/Home'
 
 class Root extends Component {
   state = {  }
@@ -12,7 +13,9 @@ class Root extends Component {
     return ( 
       <Router>
         <Switch>
-          <Route exact path="/"><h1>Main Board</h1></Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
         </Switch>
         <Switch>
           <Route exact path="/details/:id"><h1>Details of game</h1></Route>
