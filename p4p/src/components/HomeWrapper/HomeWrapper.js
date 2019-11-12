@@ -1,9 +1,9 @@
 import React from 'react';
-import 'components/HomeWrapper/HomeWrapper.scss'
+import styles from 'components/HomeWrapper/HomeWrapper.module.scss';
 
 const HomeWrapper = (props) => {
     return ( 
-        <div className="homeWrapper">
+        <div className={styles.homeWrapper}>
             {props.children}
         </div>
         

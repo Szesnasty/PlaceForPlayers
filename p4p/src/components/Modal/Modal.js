@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 
-import 'components/Modal/Modal.scss'
+
+import styles from 'components/Modal/Modal.module.scss';
 
 
-const MODAL_OPEN_CLASS = "body--modal-open";
+const MODAL_OPEN_CLASS = styles.bodyModalOpen;
 
 class Modal  extends Component {
       state = { 
-        // id: this.props.match.params.id,
         showModal: true,
     }
 
     modalRef=this.props.modalRef;
-    // handleCloseModal=(e)=>this.props.handleCloseModal(e);
 
-     
     componentDidMount(){
         document.body.classList.add(MODAL_OPEN_CLASS);
 
@@ -29,23 +27,20 @@ class Modal  extends Component {
 
 
     render() { 
-        console.log(this.props)
+        const{onClick}=this.props;
+        const { id,name }=this.props.modalContent[0];
         return (   
-    <>
-            <div ref={this.modalRef} onClick={e=>this.props.onClick(e)}  className="modal-wrapper">
-                
-                <div   className="modal-content">
-                    <h1>{this.props.modalContent[0].name}</h1>
-                    
-                    
-                    <div>You may also like:
-                        <span></span>
+            <>
+                <div ref={this.modalRef} onClick={onClick}  className={styles.modalWrapper}>
+                    <div className={styles.modalContent}>
+                    <span className={styles.modalContent__CloseBtn}  ref={this.modalRef}>&#215;</span>
+                        <h1>{name}</h1>
+                        <div>You may also like:
+                            <span></span>
+                        </div>
+                        <Link target="_blank" to={`/details/${id}`}>Read more...</Link>
                     </div>
-                    <Link target="_blank" to={`/details/${this.props.modalContent[0].id}`}>Read more...</Link>
-                </div>
-
-                
-            </div> 
+                </div> 
             </>
         );
     }

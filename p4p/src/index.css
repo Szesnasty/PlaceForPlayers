@@ -16,7 +16,9 @@ body {
   min-height: 100vh;
 }
 
-
+.infinite-scroll-component{
+  overflow: visible !important;
+} 
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
