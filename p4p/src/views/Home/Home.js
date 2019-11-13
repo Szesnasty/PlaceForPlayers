@@ -77,6 +77,7 @@ class Home extends Component {
       };
 
     render() { 
+        console.log(this.state.modalContent);
        
         const { isModal, modalContent, listOfGames}=this.state;
         return (

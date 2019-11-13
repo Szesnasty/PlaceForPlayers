@@ -24,10 +24,14 @@
     height: 80vh;
     border-radius: 8px;
     background-color: #ffffff;
-    -webkit-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.75);
-    overflow: auto;
+
+
+    // background: gold;
+
+
+    background: rgb(255,215,0);
+background: linear-gradient(180deg, rgba(255,215,0,1) 75%, rgba(83,120,149,1) 100%);
+  
     animation-name: rotationPopup;
     animation-duration: 1s;
     padding: 20px;
@@ -44,8 +48,56 @@
     font-weight: bold;
     line-height: 1;
     position: absolute;
-    right: -17px;
-    top: -37px;
+    right: -53px;
+    top: -69px;
+    color: #00ff4e;
+}
+
+.modalContent__videoWrapper{
+    max-width: 640px;
+    min-height: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modalContent__video{
+    width: 100%;
+}
+
+.modalContent__bgVideoWrapper{
+    position: relative;
+}
+.modalContent__bgVideo{
+    width: 100%;
+    cursor: pointer;
+}
+
+.modalContent__playBtn{
+    width: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+}
+
+.modalContent__ShowMoreBtn{
+    transition: 0.3s;
+    display: inline-block;
+    font-size: 40px;
+    padding: 10px 40px;
+    background: black;
+    color: #ffffff;
+    border-radius: 12px;
+    text-decoration: none;
+    margin-top: 18px;
+        
+    background: #283048;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #859398, #283048);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #859398, #283048); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    &:hover{
+        transform: scale(1.05);
+    }
 }
 
 @keyframes showPopup {

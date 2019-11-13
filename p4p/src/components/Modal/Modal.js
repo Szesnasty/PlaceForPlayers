@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 
 
 import styles from 'components/Modal/Modal.module.scss';
+import playBtn from 'assets/play-button.svg'
 
 
 const MODAL_OPEN_CLASS = styles.bodyModalOpen;
@@ -10,6 +11,7 @@ const MODAL_OPEN_CLASS = styles.bodyModalOpen;
 class Modal  extends Component {
       state = { 
         showModal: true,
+        playVideo: false
     }
 
     modalRef=this.props.modalRef;
@@ -25,20 +27,57 @@ class Modal  extends Component {
     }
 
 
+    handlePlayVideo = () =>{
+        this.setState({
+            playVideo: true
+        })
+    }
 
     render() { 
         const{onClick}=this.props;
-        const { id,name }=this.props.modalContent[0];
+        const { background_image,clip, id, name, genres }=this.props.modalContent[0];
+
+        const showGenereofGame=genres.map((type)=>(
+            <span>{type.name}</span>
+        ))
         return (   
             <>
                 <div ref={this.modalRef} onClick={onClick}  className={styles.modalWrapper}>
                     <div className={styles.modalContent}>
                     <span className={styles.modalContent__CloseBtn}  ref={this.modalRef}>&#215;</span>
+
                         <h1>{name}</h1>
-                        <div>You may also like:
-                            <span></span>
+                        <div onClick={this.handlePlayVideo} className={styles.modalContent__videoWrapper}>
+                            {
+                                this.state.playVideo
+                            ?
+                            <video  className={styles.modalContent__video} 
+                                autoPlay 
+                                controls
+                                muted
+                            >
+                                <source src={clip.clip} type="video/mp4" ></source>
+                                Your browser does not support the video tag.
+                            </video>
+                            :
+                            <div className={styles.modalContent__bgVideoWrapper}>
+                            <img src={background_image} className={styles.modalContent__bgVideo} />
+                            <img src={playBtn} className={styles.modalContent__playBtn} />
+                            </div>
+                            }
+
+                            {/* select video depending on the resolution */}
+
                         </div>
-                        <Link target="_blank" to={`/details/${id}`}>Read more...</Link>
+
+                        <div>
+                            <span>Genere:</span>
+                            {showGenereofGame}
+                        </div>
+                        
+
+
+                        <Link className={styles.modalContent__ShowMoreBtn} target="_blank" to={`/details/${id}`}>Read more...</Link>
                     </div>
                 </div> 
             </>
