@@ -1,5 +1,32 @@
-.loading{
+.lds-dual-ring
+{
     width: 100%;
-    padding: 20px;
-    background: chartreuse;
+    padding: 32px;
+    text-align: center;
 }
+
+.lds-dual-ring__body {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+  }
+  .lds-dual-ring__body:after {
+    content: " ";
+    display: block;
+    width: 72px;
+    height: 72px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring__body 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring__body {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

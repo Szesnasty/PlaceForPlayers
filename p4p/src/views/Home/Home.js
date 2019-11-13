@@ -6,6 +6,7 @@ import HomeWrapper from 'components/HomeWrapper/HomeWrapper';
 import List from 'components/List/List';
 import Loading from 'components/Loading/Loading'
 import Modal from 'components/Modal/Modal'
+import HeroSection from 'components/HeroSection/HeroSection'
 
 class Home extends Component {
     state = { 
@@ -80,6 +81,7 @@ class Home extends Component {
         const { isModal, modalContent, listOfGames}=this.state;
         return (
             <>
+            <HeroSection />
             <HomeWrapper>    
                 <InfiniteScroll
                     dataLength={listOfGames.length}

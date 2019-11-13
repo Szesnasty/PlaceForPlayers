@@ -1,0 +1,17 @@
+.heroSection{
+    min-height: 50vh;
+    padding:20px;
+    background: rgb(4,0,62);
+    background: linear-gradient(90deg, rgba(4,0,62,1) 0%, rgba(0,0,0,1) 100%);
+    color: #ffffff;
+    text-align: center;
+}
+
+.heroSection__header{
+    font-size: 80px;
+    font-weight: lighter;
+}
+
+.heroSection__headerSpan{
+    font-size: 120px;
+}

@@ -3,7 +3,9 @@ import 'components/Loading/Loading.scss'
 
 const Loading = () => {
     return ( 
-        <div className="loading">Loading...</div>
+        <div className="lds-dual-ring">
+            <div className="lds-dual-ring__body"></div>
+        </div>
      );
 }
  
