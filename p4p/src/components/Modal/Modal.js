@@ -33,9 +33,16 @@ class Modal  extends Component {
         })
     }
 
+
+     
+
+
     render() { 
-        const{onClick}=this.props;
-        const { background_image,clip, id, name, genres }=this.props.modalContent[0];
+        const{onClick, addFavGame}=this.props;
+        
+        const selectedGame=this.props.modalContent[0];
+
+        const { background_image,clip, id, name, genres }=selectedGame;
 
         const showGenereofGame=genres.map((type)=>(
             <span>{type.name}</span>
@@ -78,6 +85,9 @@ class Modal  extends Component {
 
 
                         <Link className={styles.modalContent__ShowMoreBtn} target="_blank" to={`/details/${id}`}>Read more...</Link>
+                        <div>
+                            <button onClick={(e, selectedGame)=>addFavGame(e, this.props.modalContent[0])}>Add to Your Fav List!</button>
+                        </div>
                     </div>
                 </div> 
             </>

@@ -3,7 +3,7 @@ import 'components/Card/Card.scss'
 
 const Card = (props) => {
     const {                
-        backgroundIimage,
+        backgroundImage,
         clip,
         genres,
         id,
@@ -11,15 +11,22 @@ const Card = (props) => {
         platforms,
         shortScreenshots
     }=props;
-    const bgImage={backgroundImage: `url(${backgroundIimage})`};
-    
+
+    // let bgAfterCrop=backgroundImage.replace("media/", "media/crop/600/400/");
+    let bgAfterCrop=backgroundImage;
+
+    {bgAfterCrop ===null ? bgAfterCrop="" : bgAfterCrop=backgroundImage.replace("media/", "media/crop/600/400/")}
+
+    const bgImage={backgroundImage: `url(${bgAfterCrop})`};
+ 
     return ( 
         <div className="card">
-            {/* <img className="card__img" src={backgroundIimage} /> */}
+            {/* <img className="card__img" src={backgroundImage} /> */}
             <div style={bgImage} className="card__img"></div>
             <h2 className="card__header">{name}</h2>
             <div>
                 {/* <img width="48" src={platforms[1].platform.image_background} /> */}
+                
             </div>
         </div>
      );

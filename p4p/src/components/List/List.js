@@ -12,12 +12,12 @@ const List = (props) => {
 
 
         <ListItems 
-            backgroundIimage={singleItem.background_image}
+            backgroundImage={singleItem.background_image}
             clip={singleItem.clip}
             genres={singleItem.genres}
             id={singleItem.id} 
             isModal={isModal}
-            key={singleItem.id} 
+            key={`${singleItem.id}-${new Date().getTime()}`} 
             name={singleItem.name} 
             platforms={singleItem.platforms}
             shortScreenshots={singleItem.short_screenshots}

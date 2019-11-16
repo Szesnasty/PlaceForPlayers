@@ -10,7 +10,7 @@ import 'components/ListItems/ListItems.scss';
 
 const ListItems = (props) => {
     const {
-        backgroundIimage,
+        backgroundImage,
         clip,
         genres,
         id,
@@ -25,7 +25,7 @@ const ListItems = (props) => {
             <li  onClick={(e)=>onClick(id)} className="listItem">
                 {/* <Link target="_blank" to={`/details/${id}`}> */}
                     <Card 
-                        backgroundIimage={backgroundIimage}
+                        backgroundImage={backgroundImage}
                         clip={clip}
                         genres={genres}
                         id={id} 
