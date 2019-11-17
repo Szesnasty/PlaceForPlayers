@@ -17,12 +17,13 @@ const ListItems = (props) => {
         name,
         onClick,
         platforms,
-        shortScreenshots
+        shortScreenshots,
+        wayOfDisplayingDetails
     }=props;
     return (
         <>
 
-            <li  onClick={(e)=>onClick(id)} className="listItem">
+            <li  className="listItem">
                 {/* <Link target="_blank" to={`/details/${id}`}> */}
                     <Card 
                         backgroundImage={backgroundImage}
@@ -32,6 +33,8 @@ const ListItems = (props) => {
                         name={name} 
                         platforms={platforms}
                         shortScreenshots={shortScreenshots}
+                        onClick={onClick}
+                        wayOfDisplayingDetails={wayOfDisplayingDetails}
                     />
                 {/* </Link> */}
             </li>

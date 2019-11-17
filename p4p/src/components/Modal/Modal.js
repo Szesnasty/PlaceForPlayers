@@ -84,7 +84,7 @@ class Modal  extends Component {
                         
 
 
-                        <Link className={styles.modalContent__ShowMoreBtn} target="_blank" to={`/details/${id}`}>Read more...</Link>
+                        <Link className={styles.modalContent__ShowMoreBtn}  to={`/details/${id}`}>Read more...</Link>
                         <div>
                             <button onClick={(e, selectedGame)=>addFavGame(e, this.props.modalContent[0])}>Add to Your Fav List!</button>
                         </div>

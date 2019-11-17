@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import Nav from 'components/Nav/Nav';
 
 class DetailsPage extends Component {
     state = { 
@@ -27,8 +28,8 @@ class DetailsPage extends Component {
     }
 
     render() { 
-        console.log(this.state)
-        return ( <></> );
+        console.log(this.state.gameDetails)
+        return ( <><Nav /></> );
     }
 }
  

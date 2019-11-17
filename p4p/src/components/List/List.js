@@ -5,7 +5,7 @@ import ListItems from 'components/ListItems/ListItems';
 import 'components/List/List.scss';
 
 const List = (props) => {
-    const {data, onClick, isModal}=props;
+    const {data, onClick, isModal, wayOfDisplayingDetails}=props;
     const mappingByListItems=data.map(singleItem=>(
         
 
@@ -22,6 +22,7 @@ const List = (props) => {
             platforms={singleItem.platforms}
             shortScreenshots={singleItem.short_screenshots}
             onClick={(e)=>onClick(e)}
+            wayOfDisplayingDetails={wayOfDisplayingDetails}
         />
 
 

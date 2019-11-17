@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import List from 'components/List/List'
+import List from 'components/List/List';
+import Nav from 'components/Nav/Nav';
 
 
 class FavGames extends Component {
@@ -23,6 +24,7 @@ class FavGames extends Component {
         const {listOfFavGames}=this.state;
         return ( 
             <>
+            <Nav />
             <List data={listOfFavGames}/>
 
             

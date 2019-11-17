@@ -8,6 +8,7 @@ import Loading from 'components/Loading/Loading';
 import Modal from 'components/Modal/Modal';
 import HeroSection from 'components/HeroSection/HeroSection';
 import Search from 'components/Search/Search';
+import Nav from 'components/Nav/Nav';
 
 
 
@@ -32,6 +33,11 @@ class Home extends Component {
         this.getInitData();
         this.getDataFromLocalStorage();
         
+    }
+
+    componentWillUnmount(){
+        const {listOfyourFavGames}=this.state;
+        localStorage.setItem('favGames', JSON.stringify(listOfyourFavGames))
     }
 
     getDataFromLocalStorage=()=>{
@@ -209,6 +215,7 @@ class Home extends Component {
 
         return (
             <>
+            <Nav />
             <HeroSection />
             <Search searchInputRef={this.searchInputRef} onChange={this.handleSearch} />
 
@@ -221,7 +228,7 @@ class Home extends Component {
                     loader={<Loading />}
                 >
                  
-                    <List onClick={this.handleShowModal} isModal={isModal} data={listOfGames}  />
+                    <List wayOfDisplayingDetails="modal" onClick={this.handleShowModal} isModal={isModal} data={listOfGames}  />
                   
                     
 
