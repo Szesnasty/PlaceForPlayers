@@ -17,6 +17,7 @@ class Home extends Component {
         currentPage:1,
         isModal: false,
         listOfGames: [],
+        listOfyourFavGames:[],
         modalContent: '',
         pageSize: 12,
         hasMoreToInfinityScroll: true,
@@ -29,9 +30,23 @@ class Home extends Component {
 
     componentDidMount(){
         this.getInitData();
+        this.getDataFromLocalStorage();
         
     }
 
+    getDataFromLocalStorage=()=>{
+        let listOfyourFavGames= localStorage.getItem('favGames');
+
+        if(listOfyourFavGames===null){
+            listOfyourFavGames = localStorage.setItem('favGames', JSON.stringify([]));
+        }else{
+            listOfyourFavGames=JSON.parse(listOfyourFavGames)
+        }
+
+        this.setState({
+            listOfyourFavGames
+        })
+    }
 
     getInitData =()=>{
         const timer = setTimeout(() => {
@@ -144,39 +159,40 @@ class Home extends Component {
 
 
     addGameToFavList=(e, selectedGame)=>{
-        const listOfyourFavGames= localStorage.getItem('favGames');
-        let yourFavGame= selectedGame;
-        yourFavGame.YourComment="";
-        console.log(yourFavGame);
-
-        
-        let arrayToYourFavGames=[];
-        arrayToYourFavGames=arrayToYourFavGames.concat(yourFavGame)
-
-        if(listOfyourFavGames===null){
-            // localStorage.setItem('favGames', []);
+        let {listOfyourFavGames}=this.state;
+        let listOfyourFavGamesFromState=listOfyourFavGames;
 
 
-            /// setter
-            localStorage.setItem('favGames', JSON.stringify(arrayToYourFavGames));
+        // heck is alerady exist in array
+        // handleCheck(val) {
+        //     return this.state.data.some(item => val.name === item.name);
+        // }
 
+        let isAleradyExist=listOfyourFavGamesFromState.filter(item => item.id === selectedGame.id);
+
+        let msg='';
+        if(isAleradyExist.length===0){
             
-            
+            msg="The game has been added to your list!";
+            listOfyourFavGamesFromState=listOfyourFavGamesFromState.concat(selectedGame)
+
+            this.setState({
+                msg,
+                listOfyourFavGames: listOfyourFavGamesFromState
+            })
         }else{
-            let a=localStorage.getItem('favGames')
-            a=JSON.parse(a)
-            a.concat(yourFavGame)
-            /// setter
-            localStorage.setItem('favGames', JSON.stringify(a));
+            msg="Cannot add because the game is already in your list...";
+            this.setState({
+                msg
+            })
+            return false
         }
 
-        let a=localStorage.getItem('favGames')
-        a=JSON.parse(a)
-        console.log(a)
-        
 
-        console.log(listOfyourFavGames)
-        
+
+
+        console.log(this.state.listOfyourFavGames)
+        console.log(this.state.msg)
 
     }
 
