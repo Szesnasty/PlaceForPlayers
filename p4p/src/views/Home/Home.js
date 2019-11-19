@@ -172,7 +172,6 @@ class Home extends Component {
       //     msg,
       //   });
     }
-    console.log(gameSelectedByClicking);
   };
 
   render() {
