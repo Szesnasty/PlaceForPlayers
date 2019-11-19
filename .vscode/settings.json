@@ -1,6 +1,6 @@
 {
     "eslint.workingDirectories": [
-        "./UI"
+        "./p4p"
     ],
     "eslint.autoFixOnSave": true,
     "[javascript]": {
