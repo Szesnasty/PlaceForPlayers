@@ -1,123 +1,124 @@
-.bodyModalOpen{
-    overflow: hidden;
+.bodyModalOpen {
+  overflow: hidden;
 }
 
-.modalWrapper{
-    position: fixed;
-    top:0;
-    left:0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation-name: showPopup;
-    animation-duration: 0,5s;
-    color: #000000;
-    z-index: 1;
+.modalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation-name: showPopup;
+  animation-duration: 0, 5s;
+  color: #000000;
+  z-index: 1;
 }
 
+.modalContent {
+  width: 50%;
+  height: 80vh;
+  border-radius: 8px;
+  background-color: #ffffff;
 
-.modalContent{
-    width: 50%;
-    height: 80vh;
-    border-radius: 8px;
-    background-color: #ffffff;
+  // background: gold;
 
+  background: rgb(255, 215, 0);
+  background: linear-gradient(180deg, rgba(255, 215, 0, 1) 75%, rgba(83, 120, 149, 1) 100%);
 
-    // background: gold;
-
-
-    background: rgb(255,215,0);
-background: linear-gradient(180deg, rgba(255,215,0,1) 75%, rgba(83,120,149,1) 100%);
-  
-    animation-name: rotationPopup;
-    animation-duration: 1s;
-    padding: 20px;
-    text-align: center;
-    position: relative;
-
+  animation-name: rotationPopup;
+  animation-duration: 1s;
+  padding: 20px;
+  text-align: center;
+  position: relative;
 }
 
-.modalContent__CloseBtn{
-    display: inline-block;
-    font-size: 80px;
-    cursor: pointer;
-    padding: 8px;
-    font-weight: bold;
-    line-height: 1;
-    position: absolute;
-    right: -53px;
-    top: -69px;
-    color: #00ff4e;
+.modalContent__CloseBtn {
+  display: inline-block;
+  font-size: 80px;
+  cursor: pointer;
+  padding: 8px;
+  font-weight: bold;
+  line-height: 1;
+  position: absolute;
+  right: -53px;
+  top: -69px;
+  color: #00ff4e;
 }
 
-.modalContent__videoWrapper{
-    max-width: 640px;
-    min-height: 60%;
-    margin-left: auto;
-    margin-right: auto;
+.modalContent__videoWrapper {
+  max-width: 640px;
+  min-height: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.modalContent__video{
-    width: 100%;
+.modalContent__video {
+  width: 100%;
 }
 
-.modalContent__bgVideoWrapper{
-    position: relative;
+.modalContent__bgVideoWrapper {
+  position: relative;
 }
-.modalContent__bgVideo{
-    width: 100%;
-    cursor: pointer;
-}
-
-.modalContent__playBtn{
-    width: 120px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    cursor: pointer;
+.modalContent__bgVideo {
+  width: 100%;
+  cursor: pointer;
 }
 
-.modalContent__ShowMoreBtn{
-    transition: 0.3s;
-    display: inline-block;
-    font-size: 40px;
-    padding: 10px 40px;
-    background: black;
-    color: #ffffff;
-    border-radius: 12px;
-    text-decoration: none;
-    margin-top: 18px;
-        
-    background: #283048;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #859398, #283048);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #859398, #283048); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    &:hover{
-        transform: scale(1.05);
-    }
+.modalContent__playBtn {
+  width: 120px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.modalContent__ShowMoreBtn {
+  transition: 0.3s;
+  display: inline-block;
+  font-size: 40px;
+  padding: 10px 40px;
+  background: black;
+  color: #ffffff;
+  border-radius: 12px;
+  text-decoration: none;
+  margin-top: 18px;
+
+  background: #283048; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #859398, #283048); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #859398,
+    #283048
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 @keyframes showPopup {
-    from {
-        opacity:0;
-    }
-    to {
-        opacity: 1;
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
 @keyframes rotationPopup {
-    from {
-        opacity:0;
-        transform: translateY(-50%);
-    }
-    to {
-        opacity:1;
-        transform: translateY(0);
-    }
+  0% {
+    transform: translateY(-30%);
+    opacity: 0;
   }
-
-  
+  50% {
+    transform: translateY(10%);
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}

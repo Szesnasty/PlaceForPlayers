@@ -5,7 +5,7 @@ import ListItems from 'components/ListItems/ListItems';
 import 'components/List/List.scss';
 
 const List = props => {
-  const { data, onClick, isModal, wayOfDisplayingDetails } = props;
+  const { data, onClick, isModal, wayOfDisplayingDetails, handleDeleteGameFromFavList } = props;
   const mappingByListItems = data.map(singleItem => (
     <ListItems
       backgroundImage={singleItem.background_image}
@@ -19,6 +19,7 @@ const List = props => {
       shortScreenshots={singleItem.short_screenshots}
       onClick={e => onClick(e)}
       wayOfDisplayingDetails={wayOfDisplayingDetails}
+      handleDeleteGameFromFavList={handleDeleteGameFromFavList}
     />
   ));
   return <ul className="list">{mappingByListItems}</ul>;

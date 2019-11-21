@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import HomeWrapper from 'components/HomeWrapper/HomeWrapper';
+import Wrapper from 'components/Wrapper/Wrapper';
 import List from 'components/List/List';
 import Loading from 'components/Loading/Loading';
 import Modal from 'components/Modal/Modal';
@@ -110,10 +110,10 @@ class Home extends Component {
     );
   };
 
-  handleSearch = () => {
+  handleSearch = e => {
     window.scrollTo(0, 0);
     const searchInputFromRef = this.searchInputRef.current.value;
-    const { searchValue } = this.state;
+
     this.setState(
       {
         searchValue: searchInputFromRef,
@@ -121,7 +121,9 @@ class Home extends Component {
       },
       () => {
         const timerForSearch = setTimeout(() => {
+          console.log(searchInputFromRef);
           if (searchInputFromRef !== '') {
+            const { searchValue } = this.state;
             const searchInputFromState = searchValue;
 
             if (searchInputFromState === searchInputFromRef) {
@@ -144,14 +146,9 @@ class Home extends Component {
     );
   };
 
-  addGameToFavList = (e, gameSelectedByClicking) => {
+  hanldeAddGameToFavList = (e, gameSelectedByClicking) => {
     const { listOfyourFavGames } = this.state;
     let listOfyourFavGamesFromState = listOfyourFavGames;
-
-    // heck is alerady exist in array
-    // handleCheck(val) {
-    //     return this.state.data.some(item => val.name === item.name);
-    // }
 
     const isAleradyExist = listOfyourFavGamesFromState.filter(
       item => item.id === gameSelectedByClicking.id,
@@ -172,6 +169,7 @@ class Home extends Component {
       //     msg,
       //   });
     }
+    console.log(gameSelectedByClicking);
   };
 
   render() {
@@ -184,7 +182,7 @@ class Home extends Component {
         <HeroSection />
         <Search searchInputRef={this.searchInputRef} onChange={this.handleSearch} />
 
-        <HomeWrapper>
+        <Wrapper>
           <InfiniteScroll
             dataLength={listOfGames.length}
             next={this.FetchMoreData}
@@ -198,10 +196,10 @@ class Home extends Component {
               data={listOfGames}
             />
           </InfiniteScroll>
-        </HomeWrapper>
+        </Wrapper>
         {isModal ? (
           <Modal
-            addFavGame={this.addGameToFavList}
+            addFavGame={this.hanldeAddGameToFavList}
             modalRef={this.modalRef}
             onClick={this.handleCloseModal}
             modalContent={modalContent}

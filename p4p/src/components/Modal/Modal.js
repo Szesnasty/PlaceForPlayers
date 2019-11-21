@@ -46,7 +46,7 @@ class Modal extends Component {
 
             <h1>{name}</h1>
             <div onClick={this.handlePlayVideo} className={styles.modalContent__videoWrapper}>
-              {playVideo ? (
+              {playVideo && clip.clip !== null ? (
                 <video className={styles.modalContent__video} autoPlay controls muted>
                   <source src={clip.clip} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -70,10 +70,7 @@ class Modal extends Component {
               Read more...
             </Link>
             <div>
-              <button
-                type="button"
-                onClick={(e, gameSelectedByClicking) => addFavGame(e, modalContent[0])}
-              >
+              <button type="button" onClick={e => addFavGame(e, modalContent[0])}>
                 Add to Your Fav List!
               </button>
             </div>
