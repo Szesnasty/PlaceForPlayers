@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { connect } from 'react-redux';
+import * as actionCreators from 'store/actions/actionCreators';
 
 import Wrapper from 'components/Wrapper/Wrapper';
 import List from 'components/List/List';
@@ -14,7 +16,7 @@ class Home extends Component {
   state = {
     currentPage: 1,
     isModal: false,
-    listOfGames: [],
+    // listOfGames: [],
     listOfyourFavGames: [],
     modalContent: '',
     pageSize: 12,
@@ -27,9 +29,10 @@ class Home extends Component {
   searchInputRef = React.createRef();
 
   componentDidMount() {
-    this.getInitData();
+    // this.getInitData();
+    this.props.onInitGames();
 
-    this.getDataFromLocalStorage();
+    // this.getDataFromLocalStorage();
   }
 
   componentWillUnmount() {
@@ -184,7 +187,7 @@ class Home extends Component {
 
         <Wrapper>
           <InfiniteScroll
-            dataLength={listOfGames.length}
+            dataLength={this.props.listOfGames.length}
             next={this.FetchMoreData}
             hasMore={hasMoreToInfinityScroll}
             loader={<Loading />}
@@ -193,7 +196,7 @@ class Home extends Component {
               wayOfDisplayingDetails="modal"
               onClick={this.handleShowModal}
               isModal={isModal}
-              data={listOfGames}
+              data={this.props.listOfGames}
             />
           </InfiniteScroll>
         </Wrapper>
@@ -210,4 +213,17 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    listOfGames: state.listOfGames,
+    error: state.error,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onInitGames: () => dispatch(actionCreators.initGames()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
