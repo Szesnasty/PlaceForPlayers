@@ -12,14 +12,12 @@ import HeroSection from 'components/HeroSection/HeroSection';
 import Search from 'components/Search/Search';
 import Nav from 'components/Nav/Nav';
 
+const URLAPI = `https://api.rawg.io/api/`;
+
 class Home extends Component {
   state = {
-    currentPage: 1,
-    isModal: false,
-    // listOfGames: [],
     listOfyourFavGames: [],
-    modalContent: '',
-    pageSize: 12,
+
     hasMoreToInfinityScroll: true,
     searchValue: '',
   };
@@ -29,8 +27,11 @@ class Home extends Component {
   searchInputRef = React.createRef();
 
   componentDidMount() {
-    // this.getInitData();
-    this.props.onInitGames();
+    window.scrollTo(0, 0);
+    const { onInitGamesList } = this.props;
+    const urlEndpoint = `${URLAPI}games`;
+
+    onInitGamesList(1, 12, urlEndpoint);
 
     // this.getDataFromLocalStorage();
   }
@@ -52,65 +53,6 @@ class Home extends Component {
     this.setState({
       listOfyourFavGames,
     });
-  };
-
-  getInitData = () => {
-    const { currentPage, pageSize } = this.state;
-
-    axios
-      .get(`https://api.rawg.io/api/games?page=${currentPage}&page_size=${pageSize}`)
-      .then(response => {
-        const listOfGames = response.data.results;
-
-        this.setState({
-          currentPage: currentPage + 1,
-          hasMoreToInfinityScroll: true,
-          listOfGames,
-        });
-      });
-  };
-
-  handleShowModal = e => {
-    const { listOfGames } = this.state;
-    const singleGameObject = listOfGames.filter(singleGameDetails => singleGameDetails.id === e);
-
-    this.setState({
-      isModal: true,
-      modalContent: singleGameObject,
-    });
-  };
-
-  handleCloseModal = e => {
-    if (e.target === this.modalRef.current) {
-      this.setState({
-        isModal: false,
-      });
-    }
-  };
-
-  FetchMoreData = () => {
-    const { currentPage, pageSize, listOfGames } = this.state;
-    this.setState(
-      {
-        currentPage: currentPage + 1,
-      },
-      () => {
-        const timer = setTimeout(() => {
-          axios
-            .get(`https://api.rawg.io/api/games?page=${currentPage}&page_size=${pageSize}`)
-            .then(response =>
-              this.setState({
-                listOfGames: [...listOfGames].concat(response.data.results),
-              }),
-            )
-            .catch(err => err);
-        }, 400);
-
-        return () => {
-          clearTimeout(timer);
-        };
-      },
-    );
   };
 
   handleSearch = e => {
@@ -172,12 +114,20 @@ class Home extends Component {
       //     msg,
       //   });
     }
-    console.log(gameSelectedByClicking);
   };
 
   render() {
     //   crop/600/400
-    const { isModal, modalContent, listOfGames, hasMoreToInfinityScroll } = this.state;
+    const { hasMoreToInfinityScroll } = this.state;
+    const {
+      onFetchMoreGames,
+      listOfGames,
+      onHandleShowModal,
+      isModal,
+      modalContent,
+      onHandleHideModal,
+    } = this.props;
+    const referenceToModal = this.modalRef;
 
     return (
       <>
@@ -187,24 +137,25 @@ class Home extends Component {
 
         <Wrapper>
           <InfiniteScroll
-            dataLength={this.props.listOfGames.length}
-            next={this.FetchMoreData}
+            dataLength={listOfGames.length}
+            // next={this.FetchMoreData}
+            next={() => onFetchMoreGames()}
             hasMore={hasMoreToInfinityScroll}
             loader={<Loading />}
           >
             <List
               wayOfDisplayingDetails="modal"
-              onClick={this.handleShowModal}
+              onClick={e => onHandleShowModal(e)}
               isModal={isModal}
-              data={this.props.listOfGames}
+              data={listOfGames}
             />
           </InfiniteScroll>
         </Wrapper>
         {isModal ? (
           <Modal
             addFavGame={this.hanldeAddGameToFavList}
-            modalRef={this.modalRef}
-            onClick={this.handleCloseModal}
+            modalRef={referenceToModal}
+            onClick={e => onHandleHideModal(e, referenceToModal)}
             modalContent={modalContent}
           />
         ) : null}
@@ -217,12 +168,21 @@ const mapStateToProps = state => {
   return {
     listOfGames: state.listOfGames,
     error: state.error,
+    msg: state.msg,
+    currentPageProps: state.currentPage,
+    isModal: state.isModal,
+    modalContent: state.modalContent,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInitGames: () => dispatch(actionCreators.initGames()),
+    onInitGamesList: (currentPage, pageSize, endpoint) =>
+      dispatch(actionCreators.initGamesList(currentPage, pageSize, endpoint)),
+    onFetchMoreGames: () => dispatch(actionCreators.fetchMoreGames()),
+    onHandleShowModal: e => dispatch(actionCreators.handleShowModal(e)),
+    onHandleHideModal: (e, referenceToModal) =>
+      dispatch(actionCreators.handleHideModal(e, referenceToModal)),
   };
 };
 

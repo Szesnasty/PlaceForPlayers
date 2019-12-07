@@ -6,6 +6,7 @@ import 'components/List/List.scss';
 
 const List = props => {
   const { data, onClick, isModal, wayOfDisplayingDetails, handleDeleteGameFromFavList } = props;
+  console.log(data);
   const mappingByListItems = data.map(singleItem => (
     <ListItems
       backgroundImage={singleItem.background_image}
