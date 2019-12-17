@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 import * as actionCreators from 'store/actions/actionCreators';
 
 import Wrapper from 'components/Wrapper/Wrapper';
+import ContentWrapper from 'components/ContentWrapper/ContentWrapper';
 import List from 'components/List/List';
 import Loading from 'components/Loading/Loading';
 import Modal from 'components/Modal/Modal';
-import HeroSection from 'components/HeroSection/HeroSection';
-import Search from 'components/Search/Search';
+import MainHeader from 'components/MainHeader/MainHeader';
+
 import Nav from 'components/Nav/Nav';
 
 const URLAPI = `https://api.rawg.io/api/`;
@@ -28,12 +29,12 @@ class Home extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    const { onInitGamesList } = this.props;
+    const { onInitGamesList, onGetDataFromLocalStorage } = this.props;
     const urlEndpoint = `${URLAPI}games`;
 
-    onInitGamesList(1, 12, urlEndpoint);
+    onInitGamesList(1, 15, urlEndpoint);
 
-    // this.getDataFromLocalStorage();
+    onGetDataFromLocalStorage();
   }
 
   componentWillUnmount() {
@@ -41,19 +42,19 @@ class Home extends Component {
     localStorage.setItem('favGames', JSON.stringify(listOfyourFavGames));
   }
 
-  getDataFromLocalStorage = () => {
-    let listOfyourFavGames = localStorage.getItem('favGames');
+  // getDataFromLocalStorage = () => {
+  //   let listOfyourFavGames = localStorage.getItem('favGames');
 
-    if (listOfyourFavGames === null) {
-      listOfyourFavGames = localStorage.setItem('favGames', JSON.stringify([]));
-    } else {
-      listOfyourFavGames = JSON.parse(listOfyourFavGames);
-    }
+  //   if (listOfyourFavGames === null) {
+  //     listOfyourFavGames = localStorage.setItem('favGames', JSON.stringify([]));
+  //   } else {
+  //     listOfyourFavGames = JSON.parse(listOfyourFavGames);
+  //   }
 
-    this.setState({
-      listOfyourFavGames,
-    });
-  };
+  //   this.setState({
+  //     listOfyourFavGames,
+  //   });
+  // };
 
   handleSearch = e => {
     window.scrollTo(0, 0);
@@ -131,25 +132,26 @@ class Home extends Component {
 
     return (
       <>
-        <Nav />
-        <HeroSection />
-        <Search searchInputRef={this.searchInputRef} onChange={this.handleSearch} />
-
         <Wrapper>
-          <InfiniteScroll
-            dataLength={listOfGames.length}
-            // next={this.FetchMoreData}
-            next={() => onFetchMoreGames()}
-            hasMore={hasMoreToInfinityScroll}
-            loader={<Loading />}
-          >
-            <List
-              wayOfDisplayingDetails="modal"
-              onClick={e => onHandleShowModal(e)}
-              isModal={isModal}
-              data={listOfGames}
-            />
-          </InfiniteScroll>
+          <MainHeader />
+
+          <Nav />
+          <ContentWrapper>
+            <InfiniteScroll
+              dataLength={listOfGames.length}
+              // next={this.FetchMoreData}
+              next={() => onFetchMoreGames()}
+              hasMore={hasMoreToInfinityScroll}
+              loader={<Loading />}
+            >
+              <List
+                wayOfDisplayingDetails="modal"
+                onClick={e => onHandleShowModal(e)}
+                isModal={isModal}
+                data={listOfGames}
+              />
+            </InfiniteScroll>
+          </ContentWrapper>
         </Wrapper>
         {isModal ? (
           <Modal
@@ -181,8 +183,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(actionCreators.initGamesList(currentPage, pageSize, endpoint)),
     onFetchMoreGames: () => dispatch(actionCreators.fetchMoreGames()),
     onHandleShowModal: e => dispatch(actionCreators.handleShowModal(e)),
+
     onHandleHideModal: (e, referenceToModal) =>
       dispatch(actionCreators.handleHideModal(e, referenceToModal)),
+    onGetDataFromLocalStorage: () => dispatch(actionCreators.getDataFromLocalStorage()),
   };
 };
 

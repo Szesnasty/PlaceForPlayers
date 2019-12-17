@@ -16,6 +16,7 @@ const ListItems = props => {
     shortScreenshots,
     wayOfDisplayingDetails,
     handleDeleteGameFromFavList,
+    released,
   } = props;
   return (
     <>
@@ -32,6 +33,7 @@ const ListItems = props => {
           onClick={onClick}
           wayOfDisplayingDetails={wayOfDisplayingDetails}
           handleDeleteGameFromFavList={handleDeleteGameFromFavList}
+          released={released}
         />
         {/* </Link> */}
       </li>

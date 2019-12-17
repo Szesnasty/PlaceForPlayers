@@ -1,13 +1,10 @@
-.listItem{
-    transition: 0.2s;
-    width: 32%;
-    min-height: 380px;
+.listItem {
+  transition: 0.2s;
+  width: 32%;
+  min-height: 380px;
+  margin-bottom: 32px;
 
-    margin-top: 32px;
-
-    &:hover{
-        transform: scale(1.05);
-    }
+  &:hover {
+    transform: scale(1.05);
+  }
 }
-
-

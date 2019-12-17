@@ -1,0 +1,19 @@
+.MainNav {
+  position: fixed;
+  list-style-type: none;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  &__item {
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  &__Link {
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
+.active {
+  color: #ff6608;
+}

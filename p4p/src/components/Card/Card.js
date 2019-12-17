@@ -1,5 +1,5 @@
 import React from 'react';
-import 'components/Card/Card.scss';
+import styles from 'components/Card/Card.module.scss';
 import { Link } from 'react-router-dom';
 
 const Card = props => {
@@ -10,12 +10,12 @@ const Card = props => {
     onClick,
     wayOfDisplayingDetails,
     handleDeleteGameFromFavList,
+    released,
   } = props;
 
-  // let bgAfterCrop=backgroundImage.replace("media/", "media/crop/600/400/");
   let bgAfterCrop = backgroundImage;
 
-  if (bgAfterCrop === null) {
+  if (backgroundImage === null) {
     bgAfterCrop = '';
   } else {
     bgAfterCrop = backgroundImage.replace('media/', 'media/crop/600/400/');
@@ -26,20 +26,22 @@ const Card = props => {
   if (wayOfDisplayingDetails === 'modal') {
     return (
       <>
-        <div onClick={() => onClick(id)} className="card">
-          {/* <img className="card__img" src={backgroundImage} /> */}
-          <div style={bgImage} className="card__img" />
-          <h2 className="card__header">{name}</h2>
+        <div style={bgImage} onClick={() => onClick(id)} className={styles.card}>
+          <header className={styles.card__header}>
+            <h2 className={styles.card__title}>{name}</h2>
+            <h3 className={styles.card__subtitle}>Release date: {released}</h3>
+          </header>
         </div>
       </>
     );
   }
   return (
     <>
-      <div className="card">
-        {/* <img className="card__img" src={backgroundImage} /> */}
-        <div style={bgImage} className="card__img" />
-        <h2 className="card__header">{name}</h2>
+      <div style={bgImage} className={styles.card}>
+        <header className={styles.card__header}>
+          <h2 className={styles.card__title}>{name}</h2>
+          <h3 className={styles.card__subtitle}>Release date: {released}</h3>
+        </header>
         <button type="button">
           <Link to={`/details/${id}`}>Show more details</Link>
         </button>

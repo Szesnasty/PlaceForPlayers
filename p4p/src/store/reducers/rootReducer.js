@@ -7,6 +7,7 @@ const initialState = {
   msg: null,
   isModal: false,
   modalContent: null,
+  listOfyourFavGames: [],
 };
 
 const initGamesListSuccess = (state, action) => {
@@ -53,6 +54,21 @@ const handleHideModal = (state, action) => {
   };
 };
 
+const getDataFromLocalStorage = state => {
+  let listOfyourFavGames = localStorage.getItem('favGames');
+
+  if (listOfyourFavGames === null) {
+    listOfyourFavGames = localStorage.setItem('favGames', JSON.stringify([]));
+  } else {
+    listOfyourFavGames = JSON.parse(listOfyourFavGames);
+  }
+
+  return {
+    ...state,
+    listOfyourFavGames,
+  };
+};
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.INIT_GAMES_LIST_SUCCESS:
@@ -63,6 +79,8 @@ const rootReducer = (state = initialState, action) => {
       return handleShowModal(state, action);
     case actionTypes.HANDLE_HIDE_MODAL:
       return handleHideModal(state, action);
+    case actionTypes.GET_DATA_FROM_LOCAL_STORAGE:
+      return getDataFromLocalStorage(state, action);
     default:
       return state;
   }

@@ -1,0 +1,26 @@
+.mainHeader {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  justify-content: space-between;
+  color: #ffffff;
+  text-align: center;
+  min-height: 128px;
+
+  &__mediaWrapper {
+    display: flex;
+    align-items: center;
+  }
+  &__logo {
+    margin-right: 20px;
+  }
+  &__header {
+    font-size: 80px;
+    font-weight: lighter;
+  }
+  &__socialMedia {
+    width: 32px;
+    margin-left: 18px;
+  }
+}

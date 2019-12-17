@@ -27,10 +27,9 @@ export const initGamesList = (currentPage, pageSize, endpoint) => {
     axios
       .get(fullURL)
       .then(response => {
-        console.log(response.status);
         const listOfGames = response.data.results;
         const msg = response.status;
-
+        console.log(listOfGames);
         dispatch(initGamesListSuccess(listOfGames, currentPage, msg));
       })
       .catch(error => {
@@ -53,7 +52,7 @@ export const fetchMoreGames = () => {
     const { currentPage } = getState();
     const nextPage = currentPage + 1;
 
-    const pageSize = 12;
+    const pageSize = 15;
     const fullURL = `${URLAPI}games?page=${nextPage}&page_size=${pageSize}`;
     console.log(fullURL);
     const timer = setTimeout(() => {
@@ -88,5 +87,11 @@ export const handleHideModal = (e, referenceToModal) => {
     type: actionType.HANDLE_HIDE_MODAL,
     e,
     referenceToModal,
+  };
+};
+
+export const getDataFromLocalStorage = () => {
+  return {
+    type: actionType.GET_DATA_FROM_LOCAL_STORAGE,
   };
 };

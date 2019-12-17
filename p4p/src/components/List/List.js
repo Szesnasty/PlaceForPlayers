@@ -21,6 +21,7 @@ const List = props => {
       onClick={e => onClick(e)}
       wayOfDisplayingDetails={wayOfDisplayingDetails}
       handleDeleteGameFromFavList={handleDeleteGameFromFavList}
+      released={singleItem.released}
     />
   ));
   return <ul className="list">{mappingByListItems}</ul>;
