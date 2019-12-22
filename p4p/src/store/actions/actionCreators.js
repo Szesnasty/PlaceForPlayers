@@ -95,3 +95,46 @@ export const getDataFromLocalStorage = () => {
     type: actionType.GET_DATA_FROM_LOCAL_STORAGE,
   };
 };
+
+const setSearchValueToState = referenceToSearchInput => {
+  return {
+    type: actionType.SET_SEARCH_VALUE_TO_STATE,
+    referenceToSearchInput: referenceToSearchInput.current.value,
+  };
+};
+
+const getDataAfterSearching = dataAfterSearching => {
+  return {
+    type: actionType.GET_DATA_AFTER_SEARCHING,
+    dataAfterSearching,
+  };
+};
+
+export const handleSearch = (e, referenceToSearchInput) => {
+  window.scrollTo(0, 0);
+  return (dispatch, getState) => {
+    dispatch(setSearchValueToState(referenceToSearchInput));
+
+    const searchInputFromRef = referenceToSearchInput.current.value;
+
+    const timerForSearch = setTimeout(() => {
+      if (searchInputFromRef !== '') {
+        const { searchValue } = getState();
+
+        if (searchValue === searchInputFromRef) {
+          const query = `https://api.rawg.io/api/games?search=${searchValue}&page_size=20&ordering=-rating`;
+          axios.get(query).then(response => {
+            const dataAfterSearching = response.data.results;
+            dispatch(getDataAfterSearching(dataAfterSearching));
+          });
+        }
+      } else {
+        const urlEndpoint = `${URLAPI}games`;
+        dispatch(initGamesList(1, 15, urlEndpoint));
+      }
+    }, 500);
+    return () => {
+      clearTimeout(timerForSearch);
+    };
+  };
+};

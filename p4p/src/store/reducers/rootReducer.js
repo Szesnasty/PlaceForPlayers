@@ -2,7 +2,10 @@ import * as actionTypes from 'store/actions/actionType';
 
 const initialState = {
   listOfGames: [],
+  searchValue: '',
+
   currentPage: null,
+  hasMoreDataToInfinityScroll: true,
   error: null,
   msg: null,
   isModal: false,
@@ -15,6 +18,7 @@ const initGamesListSuccess = (state, action) => {
     ...state,
     listOfGames: action.listOfGames,
     currentPage: action.currentPage,
+    hasMoreDataToInfinityScroll: true,
     error: false,
     msg: action.msg,
   };
@@ -69,6 +73,21 @@ const getDataFromLocalStorage = state => {
   };
 };
 
+const setSearchValueToState = (state, action) => {
+  return {
+    ...state,
+    searchValue: action.referenceToSearchInput,
+  };
+};
+
+const getDataAfterSearching = (state, action) => {
+  return {
+    ...state,
+    listOfGames: action.dataAfterSearching,
+    hasMoreDataToInfinityScroll: false,
+  };
+};
+
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.INIT_GAMES_LIST_SUCCESS:
@@ -81,6 +100,10 @@ const rootReducer = (state = initialState, action) => {
       return handleHideModal(state, action);
     case actionTypes.GET_DATA_FROM_LOCAL_STORAGE:
       return getDataFromLocalStorage(state, action);
+    case actionTypes.SET_SEARCH_VALUE_TO_STATE:
+      return setSearchValueToState(state, action);
+    case actionTypes.GET_DATA_AFTER_SEARCHING:
+      return getDataAfterSearching(state, action);
     default:
       return state;
   }

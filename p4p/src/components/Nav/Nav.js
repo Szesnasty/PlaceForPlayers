@@ -22,18 +22,19 @@ const Nav = () => {
         </NavLink>
       </li>
       <li className={styles.MainNav__item}>
-        <NavLink
+        {/* <NavLink
           className={styles.MainNav__Link}
           activeClassName={styles.active}
           exact
           to="/your-fav-games"
         >
           Search
-        </NavLink>
+        </NavLink> */}
       </li>
       <li className={styles.MainNav__item}>
         {/* <Search searchInputRef={this.searchInputRef} onChange={this.handleSearch} /> */}
         {/* <Search /> */}
+        <Search />
       </li>
     </ul>
   );

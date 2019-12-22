@@ -42,56 +42,6 @@ class Home extends Component {
     localStorage.setItem('favGames', JSON.stringify(listOfyourFavGames));
   }
 
-  // getDataFromLocalStorage = () => {
-  //   let listOfyourFavGames = localStorage.getItem('favGames');
-
-  //   if (listOfyourFavGames === null) {
-  //     listOfyourFavGames = localStorage.setItem('favGames', JSON.stringify([]));
-  //   } else {
-  //     listOfyourFavGames = JSON.parse(listOfyourFavGames);
-  //   }
-
-  //   this.setState({
-  //     listOfyourFavGames,
-  //   });
-  // };
-
-  handleSearch = e => {
-    window.scrollTo(0, 0);
-    const searchInputFromRef = this.searchInputRef.current.value;
-
-    this.setState(
-      {
-        searchValue: searchInputFromRef,
-        currentPage: 1,
-      },
-      () => {
-        const timerForSearch = setTimeout(() => {
-          console.log(searchInputFromRef);
-          if (searchInputFromRef !== '') {
-            const { searchValue } = this.state;
-            const searchInputFromState = searchValue;
-
-            if (searchInputFromState === searchInputFromRef) {
-              const query = `https://api.rawg.io/api/games?search=${searchInputFromState}&page_size=20&ordering=-rating`;
-              axios.get(query).then(response => {
-                this.setState({
-                  listOfGames: response.data.results,
-                  hasMoreToInfinityScroll: false,
-                });
-              });
-            }
-          } else {
-            this.getInitData();
-          }
-        }, 500);
-        return () => {
-          clearTimeout(timerForSearch);
-        };
-      },
-    );
-  };
-
   hanldeAddGameToFavList = (e, gameSelectedByClicking) => {
     const { listOfyourFavGames } = this.state;
     let listOfyourFavGamesFromState = listOfyourFavGames;
@@ -118,8 +68,6 @@ class Home extends Component {
   };
 
   render() {
-    //   crop/600/400
-    const { hasMoreToInfinityScroll } = this.state;
     const {
       onFetchMoreGames,
       listOfGames,
@@ -127,6 +75,7 @@ class Home extends Component {
       isModal,
       modalContent,
       onHandleHideModal,
+      hasMoreDataToInfinityScroll,
     } = this.props;
     const referenceToModal = this.modalRef;
 
@@ -141,7 +90,7 @@ class Home extends Component {
               dataLength={listOfGames.length}
               // next={this.FetchMoreData}
               next={() => onFetchMoreGames()}
-              hasMore={hasMoreToInfinityScroll}
+              hasMore={hasMoreDataToInfinityScroll}
               loader={<Loading />}
             >
               <List
@@ -174,6 +123,7 @@ const mapStateToProps = state => {
     currentPageProps: state.currentPage,
     isModal: state.isModal,
     modalContent: state.modalContent,
+    hasMoreDataToInfinityScroll: state.hasMoreDataToInfinityScroll,
   };
 };
 
