@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import styles from 'components/Search/Search.module.scss';
 import * as actionCreators from 'store/actions/actionCreators';
 
 class Search extends Component {
@@ -12,9 +13,10 @@ class Search extends Component {
     return (
       <label htmlFor="search">
         <input
+          className={styles.SearchInput}
           type="text"
           onChange={e => onHandleSearch(e, this.searchInputRef)}
-          placeholder="Search..."
+          placeholder="Search game..."
           ref={this.searchInputRef}
           id="search"
         />
@@ -23,10 +25,6 @@ class Search extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     onHandleSearch: (e, referenceToSearchInput) =>
@@ -34,4 +32,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search);

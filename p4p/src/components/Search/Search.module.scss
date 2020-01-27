@@ -1,0 +1,16 @@
+.SearchInput {
+  padding: 8px;
+  border-bottom: 1px solid white;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: transparent;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  overflow: hidden;
+  @media screen and (min-width: 768px) {
+    width: 100%;
+    margin-top: 50px;
+  }
+}

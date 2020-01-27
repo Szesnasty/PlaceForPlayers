@@ -1,12 +1,39 @@
 .mainHeader {
   display: flex;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 10px 20px;
   justify-content: space-between;
   color: #ffffff;
   text-align: center;
-  min-height: 128px;
+  min-height: 80px;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+
+  background: rgba(0, 17, 31, 1);
+  background: -moz-linear-gradient(left, rgba(0, 17, 31, 1) 0%, rgba(3, 29, 32, 1) 100%);
+  background: -webkit-gradient(
+    left top,
+    right top,
+    color-stop(0%, rgba(0, 17, 31, 1)),
+    color-stop(100%, rgba(3, 29, 32, 1))
+  );
+  background: -webkit-linear-gradient(left, rgba(0, 17, 31, 1) 0%, rgba(3, 29, 32, 1) 100%);
+  background: -o-linear-gradient(left, rgba(0, 17, 31, 1) 0%, rgba(3, 29, 32, 1) 100%);
+  background: -ms-linear-gradient(left, rgba(0, 17, 31, 1) 0%, rgba(3, 29, 32, 1) 100%);
+  background: linear-gradient(to right, rgba(0, 17, 31, 1) 0%, rgba(3, 29, 32, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00111f', endColorstr='#031d20', GradientType=1 );
+
+  @media only screen and (min-width: 768px) {
+    padding: 20px 0px;
+    width: 94%;
+    margin: 0 auto;
+    min-height: 128px;
+    position: relative;
+    background: transparent;
+  }
 
   &__mediaWrapper {
     display: flex;
@@ -14,6 +41,10 @@
   }
   &__logo {
     margin-right: 20px;
+    width: 180px;
+    @media only screen and (min-width: 768px) {
+      width: 240px;
+    }
   }
   &__header {
     font-size: 80px;

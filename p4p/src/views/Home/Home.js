@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { connect } from 'react-redux';
 import * as actionCreators from 'store/actions/actionCreators';
@@ -9,20 +9,12 @@ import ContentWrapper from 'components/ContentWrapper/ContentWrapper';
 import List from 'components/List/List';
 import Loading from 'components/Loading/Loading';
 import Modal from 'components/Modal/Modal';
-import MainHeader from 'components/MainHeader/MainHeader';
 
 import Nav from 'components/Nav/Nav';
 
 const URLAPI = `https://api.rawg.io/api/`;
 
 class Home extends Component {
-  state = {
-    listOfyourFavGames: [],
-
-    hasMoreToInfinityScroll: true,
-    searchValue: '',
-  };
-
   modalRef = React.createRef();
 
   searchInputRef = React.createRef();
@@ -38,7 +30,7 @@ class Home extends Component {
   }
 
   componentWillUnmount() {
-    const { listOfyourFavGames } = this.state;
+    const { listOfyourFavGames } = this.props;
     localStorage.setItem('favGames', JSON.stringify(listOfyourFavGames));
   }
 
@@ -82,8 +74,6 @@ class Home extends Component {
     return (
       <>
         <Wrapper>
-          <MainHeader />
-
           <Nav />
           <ContentWrapper>
             <InfiniteScroll
@@ -124,6 +114,7 @@ const mapStateToProps = state => {
     isModal: state.isModal,
     modalContent: state.modalContent,
     hasMoreDataToInfinityScroll: state.hasMoreDataToInfinityScroll,
+    listOfyourFavGames: state.listOfyourFavGames,
   };
 };
 
