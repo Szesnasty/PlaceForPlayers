@@ -55,23 +55,23 @@ export const fetchMoreGames = () => {
     const pageSize = 15;
     const fullURL = `${URLAPI}games?page=${nextPage}&page_size=${pageSize}`;
     console.log(fullURL);
-    const timer = setTimeout(() => {
-      axios
-        .get(fullURL)
-        .then(response => {
-          const listOfGames = response.data.results;
-          console.log(listOfGames);
-          const msg = response.status;
+    // const timer = setTimeout(() => {
+    axios
+      .get(fullURL)
+      .then(response => {
+        const listOfGames = response.data.results;
+        console.log(listOfGames);
+        const msg = response.status;
 
-          dispatch(fetchMoreGamesSuccess(listOfGames, nextPage, msg));
-        })
-        .catch(error => {
-          // dispatch(initGamesListFailed(error));
-        });
-    }, 400);
-    return () => {
-      clearTimeout(timer);
-    };
+        dispatch(fetchMoreGamesSuccess(listOfGames, nextPage, msg));
+      })
+      .catch(error => {
+        // dispatch(initGamesListFailed(error));
+      });
+    // }, 400);
+    // return () => {
+    //   clearTimeout(timer);
+    // };
   };
 };
 

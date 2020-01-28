@@ -15,6 +15,10 @@ import Nav from 'components/Nav/Nav';
 const URLAPI = `https://api.rawg.io/api/`;
 
 class Home extends Component {
+  state = {
+    listOfyourFavGames: [],
+  };
+
   modalRef = React.createRef();
 
   searchInputRef = React.createRef();
@@ -24,17 +28,28 @@ class Home extends Component {
     const { onInitGamesList, onGetDataFromLocalStorage } = this.props;
     const urlEndpoint = `${URLAPI}games`;
 
-    onInitGamesList(1, 15, urlEndpoint);
+    const pageSize = 15;
+    onInitGamesList(1, pageSize, urlEndpoint);
 
     onGetDataFromLocalStorage();
   }
 
-  componentWillUnmount() {
+  componentDidUpdate(prevProps) {
     const { listOfyourFavGames } = this.props;
+    if (listOfyourFavGames !== prevProps.listOfyourFavGames) {
+      this.setState({
+        listOfyourFavGames,
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    const { listOfyourFavGames } = this.state;
     localStorage.setItem('favGames', JSON.stringify(listOfyourFavGames));
   }
 
   hanldeAddGameToFavList = (e, gameSelectedByClicking) => {
+    console.log(gameSelectedByClicking);
     const { listOfyourFavGames } = this.state;
     let listOfyourFavGamesFromState = listOfyourFavGames;
 
@@ -86,7 +101,6 @@ class Home extends Component {
               <List
                 wayOfDisplayingDetails="modal"
                 onClick={e => onHandleShowModal(e)}
-                isModal={isModal}
                 data={listOfGames}
               />
             </InfiniteScroll>

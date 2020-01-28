@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import List from 'components/List/List';
 import Nav from 'components/Nav/Nav';
 import Wrapper from 'components/Wrapper/Wrapper';
+import ContentWrapper from 'components/ContentWrapper/ContentWrapper';
 
 class FavGames extends Component {
   state = {
@@ -40,10 +41,12 @@ class FavGames extends Component {
       <>
         <Nav />
         <Wrapper>
-          <List
-            data={listOfFavGames}
-            handleDeleteGameFromFavList={this.handleDeleteGameFromFavList}
-          />
+          <ContentWrapper>
+            <List
+              data={listOfFavGames}
+              handleDeleteGameFromFavList={this.handleDeleteGameFromFavList}
+            />
+          </ContentWrapper>
         </Wrapper>
       </>
     );

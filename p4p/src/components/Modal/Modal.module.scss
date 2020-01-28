@@ -6,7 +6,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.8);
   display: flex;
@@ -14,39 +14,38 @@
   justify-content: center;
   animation-name: showPopup;
   animation-duration: 0, 5s;
-  color: #000000;
+  color: #425059;
   z-index: 1;
 }
 
 .modalContent {
-  width: 50%;
-  height: 80vh;
+  max-width: 90%;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(255, 102, 8, 1);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(255, 102, 8, 1);
+  box-shadow: 0px 0px 6px 0px rgba(255, 102, 8, 1);
   border-radius: 8px;
-  background-color: #ffffff;
-
-  // background: gold;
-
-  background: rgb(255, 215, 0);
-  background: linear-gradient(180deg, rgba(255, 215, 0, 1) 75%, rgba(83, 120, 149, 1) 100%);
+  background: #fafafa;
 
   animation-name: rotationPopup;
   animation-duration: 1s;
-  padding: 20px;
+  padding: 12px;
   text-align: center;
   position: relative;
-}
+  overflow-x: hidden;
+  overflow-y: auto;
+  @media screen and (min-width: 768px) {
+    max-width: 60%;
+    padding: 20px;
+  }
+  &__title {
+    color: rgba(255, 102, 8, 1);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
 
-.modalContent__CloseBtn {
-  display: inline-block;
-  font-size: 80px;
-  cursor: pointer;
-  padding: 8px;
-  font-weight: bold;
-  line-height: 1;
-  position: absolute;
-  right: -53px;
-  top: -69px;
-  color: #00ff4e;
+  &__genereTitle {
+    font-weight: bold;
+  }
 }
 
 .modalContent__videoWrapper {
@@ -69,18 +68,21 @@
 }
 
 .modalContent__playBtn {
-  width: 120px;
+  width: 60px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  @media screen and (min-width: 768px) {
+    width: 120px;
+  }
 }
 
 .modalContent__ShowMoreBtn {
   transition: 0.3s;
   display: inline-block;
-  font-size: 40px;
+  font-size: 20px;
   padding: 10px 40px;
   background: black;
   color: #ffffff;
@@ -88,13 +90,8 @@
   text-decoration: none;
   margin-top: 18px;
 
-  background: #283048; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #859398, #283048); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #859398,
-    #283048
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: rgba(255, 102, 8, 1);
+
   &:hover {
     transform: scale(1.05);
   }
@@ -120,5 +117,24 @@
   100% {
     transform: translateY(0%);
     opacity: 1;
+  }
+}
+
+.addToFavBtnWrapper {
+  width: 100%;
+  text-align: right;
+  margin-top: 12px;
+}
+
+.addToFavBtn {
+  width: 60px;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: none;
+  background: transparent;
+  &__icon {
+    width: 100%;
   }
 }

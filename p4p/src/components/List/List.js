@@ -5,7 +5,7 @@ import ListItems from 'components/ListItems/ListItems';
 import 'components/List/List.scss';
 
 const List = props => {
-  const { data, onClick, isModal, wayOfDisplayingDetails, handleDeleteGameFromFavList } = props;
+  const { data, onClick, wayOfDisplayingDetails, handleDeleteGameFromFavList } = props;
   console.log(data);
   const mappingByListItems = data.map(singleItem => (
     <ListItems
@@ -13,7 +13,6 @@ const List = props => {
       clip={singleItem.clip}
       genres={singleItem.genres}
       id={singleItem.id}
-      isModal={isModal}
       key={`${singleItem.id}-${new Date().getTime()}`}
       name={singleItem.name}
       platforms={singleItem.platforms}

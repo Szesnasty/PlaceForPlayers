@@ -61,7 +61,7 @@ const handleHideModal = (state, action) => {
 const getDataFromLocalStorage = state => {
   let listOfyourFavGames = localStorage.getItem('favGames');
 
-  if (listOfyourFavGames === null) {
+  if (listOfyourFavGames === [] || listOfyourFavGames === null) {
     listOfyourFavGames = localStorage.setItem('favGames', JSON.stringify([]));
   } else {
     listOfyourFavGames = JSON.parse(listOfyourFavGames);

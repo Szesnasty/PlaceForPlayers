@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from 'components/Modal/Modal.module.scss';
 import playBtn from 'assets/play-button.svg';
+import redHeart from 'assets/heartRed.svg';
 
 const MODAL_OPEN_CLASS = styles.bodyModalOpen;
 
@@ -35,16 +38,18 @@ class Modal extends Component {
 
     const { background_image, clip, id, name, genres } = selectedGame;
 
-    const showGenereofGame = genres.map(type => <span key={type.name}>{type.name}</span>);
+    const showGenereofGame = genres.map((type, index) => (
+      <span key={type.name}>
+        {type.name}
+        {genres.length === index + 1 ? null : <span>, </span>}
+      </span>
+    ));
     return (
       <>
         <div ref={this.modalRef} onClick={onClick} className={styles.modalWrapper}>
           <div className={styles.modalContent}>
-            <span className={styles.modalContent__CloseBtn} ref={this.modalRef}>
-              &#215;
-            </span>
+            <h1 className={styles.modalContent__title}>{name}</h1>
 
-            <h1>{name}</h1>
             <div onClick={this.handlePlayVideo} className={styles.modalContent__videoWrapper}>
               {playVideo && clip.clip !== null ? (
                 <video className={styles.modalContent__video} autoPlay controls muted>
@@ -57,21 +62,22 @@ class Modal extends Component {
                   <img alt={name} src={playBtn} className={styles.modalContent__playBtn} />
                 </div>
               )}
-
-              {/* select video depending on the resolution */}
             </div>
-
             <div>
-              <span>Genere:</span>
+              <span className={styles.modalContent__genereTitle}>Genere: </span>
               {showGenereofGame}
             </div>
-
             <Link className={styles.modalContent__ShowMoreBtn} to={`/details/${id}`}>
               Read more...
             </Link>
-            <div>
-              <button type="button" onClick={e => addFavGame(e, modalContent[0])}>
-                Add to Your Fav List!
+            <div className={styles.addToFavBtnWrapper}>
+              <span>Add to Fav</span>
+              <button
+                className={styles.addToFavBtn}
+                type="button"
+                onClick={e => addFavGame(e, selectedGame)}
+              >
+                <img className={styles.addToFavBtn__icon} src={redHeart} alt="heart" />
               </button>
             </div>
           </div>
