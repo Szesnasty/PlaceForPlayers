@@ -55,7 +55,6 @@ export const fetchMoreGames = () => {
     const pageSize = 15;
     const fullURL = `${URLAPI}games?page=${nextPage}&page_size=${pageSize}`;
     console.log(fullURL);
-    // const timer = setTimeout(() => {
     axios
       .get(fullURL)
       .then(response => {
@@ -68,10 +67,6 @@ export const fetchMoreGames = () => {
       .catch(error => {
         // dispatch(initGamesListFailed(error));
       });
-    // }, 400);
-    // return () => {
-    //   clearTimeout(timer);
-    // };
   };
 };
 
@@ -87,12 +82,6 @@ export const handleHideModal = (e, referenceToModal) => {
     type: actionType.HANDLE_HIDE_MODAL,
     e,
     referenceToModal,
-  };
-};
-
-export const getDataFromLocalStorage = () => {
-  return {
-    type: actionType.GET_DATA_FROM_LOCAL_STORAGE,
   };
 };
 
@@ -136,5 +125,26 @@ export const handleSearch = (e, referenceToSearchInput) => {
     return () => {
       clearTimeout(timerForSearch);
     };
+  };
+};
+
+export const getDataFromLocalStorage = () => {
+  return {
+    type: actionType.GET_DATA_FROM_LOCAL_STORAGE,
+  };
+};
+
+export const hanldeAddGameToFavList = (e, selectedGame) => {
+  return {
+    type: actionType.HANDLE_ADD_GAME_TO_FAV_LIST,
+    selectedGame,
+    e,
+  };
+};
+
+export const handleDeleteGameFromFavList = id => {
+  return {
+    type: actionType.HANDLE_DELETE_GAME_FROM_FAV_LIST,
+    id,
   };
 };

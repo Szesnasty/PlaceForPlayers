@@ -2,10 +2,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import styles from 'components/Modal/Modal.module.scss';
 import playBtn from 'assets/play-button.svg';
 import redHeart from 'assets/heartRed.svg';
+import * as actionCreators from 'store/actions/actionCreators';
 
 const MODAL_OPEN_CLASS = styles.bodyModalOpen;
 
@@ -32,7 +34,7 @@ class Modal extends Component {
 
   render() {
     const { playVideo } = this.state;
-    const { onClick, addFavGame, modalContent } = this.props;
+    const { onClick, addFavGame, modalContent, onHanldeAddGameToFavList } = this.props;
 
     const selectedGame = modalContent[0];
 
@@ -75,7 +77,7 @@ class Modal extends Component {
               <button
                 className={styles.addToFavBtn}
                 type="button"
-                onClick={e => addFavGame(e, selectedGame)}
+                onClick={e => onHanldeAddGameToFavList(e, selectedGame)}
               >
                 <img className={styles.addToFavBtn__icon} src={redHeart} alt="heart" />
               </button>
@@ -87,4 +89,11 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+const mapDispatchToProps = dispatch => {
+  return {
+    onHanldeAddGameToFavList: (e, selectedGame) =>
+      dispatch(actionCreators.hanldeAddGameToFavList(e, selectedGame)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Modal);

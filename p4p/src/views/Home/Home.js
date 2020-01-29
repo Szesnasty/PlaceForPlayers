@@ -19,7 +19,11 @@ class Home extends Component {
     listOfyourFavGames: [],
   };
 
+  // PROBLEM Z REF NA BUTTONIE DO MODALA!!!
+
   modalRef = React.createRef();
+
+  addToFavBtnRef = React.createRef();
 
   searchInputRef = React.createRef();
 
@@ -29,7 +33,8 @@ class Home extends Component {
     const urlEndpoint = `${URLAPI}games`;
 
     const pageSize = 15;
-    onInitGamesList(1, pageSize, urlEndpoint);
+    const startPage = 1;
+    onInitGamesList(startPage, pageSize, urlEndpoint);
 
     onGetDataFromLocalStorage();
   }
@@ -48,32 +53,6 @@ class Home extends Component {
     localStorage.setItem('favGames', JSON.stringify(listOfyourFavGames));
   }
 
-  hanldeAddGameToFavList = (e, gameSelectedByClicking) => {
-    console.log(gameSelectedByClicking);
-    const { listOfyourFavGames } = this.state;
-    let listOfyourFavGamesFromState = listOfyourFavGames;
-
-    const isAleradyExist = listOfyourFavGamesFromState.filter(
-      item => item.id === gameSelectedByClicking.id,
-    );
-
-    // let msg = '';
-    if (isAleradyExist.length === 0) {
-      //   msg = 'The game has been added to your list!';
-      listOfyourFavGamesFromState = listOfyourFavGamesFromState.concat(gameSelectedByClicking);
-
-      this.setState({
-        // msg,
-        listOfyourFavGames: listOfyourFavGamesFromState,
-      });
-    } else {
-      //   msg = 'Cannot add because the game is already in your list...';
-      //   this.setState({
-      //     msg,
-      //   });
-    }
-  };
-
   render() {
     const {
       onFetchMoreGames,
@@ -85,7 +64,8 @@ class Home extends Component {
       hasMoreDataToInfinityScroll,
     } = this.props;
     const referenceToModal = this.modalRef;
-
+    const { addToFavBtnRef } = this;
+    console.log(addToFavBtnRef.current);
     return (
       <>
         <Wrapper>
@@ -112,6 +92,7 @@ class Home extends Component {
             modalRef={referenceToModal}
             onClick={e => onHandleHideModal(e, referenceToModal)}
             modalContent={modalContent}
+            addToFavBtnRef={addToFavBtnRef}
           />
         ) : null}
       </>

@@ -58,6 +58,21 @@ const handleHideModal = (state, action) => {
   };
 };
 
+const setSearchValueToState = (state, action) => {
+  return {
+    ...state,
+    searchValue: action.referenceToSearchInput,
+  };
+};
+
+const getDataAfterSearching = (state, action) => {
+  return {
+    ...state,
+    listOfGames: action.dataAfterSearching,
+    hasMoreDataToInfinityScroll: false,
+  };
+};
+
 const getDataFromLocalStorage = state => {
   let listOfyourFavGames = localStorage.getItem('favGames');
 
@@ -73,18 +88,41 @@ const getDataFromLocalStorage = state => {
   };
 };
 
-const setSearchValueToState = (state, action) => {
+const hanldeAddGameToFavList = (state, action) => {
+  action.e.persist();
+  const { selectedGame } = action;
+  const { id } = selectedGame;
+  const { listOfyourFavGames } = state;
+  let listOfyourFavGamesFromState = listOfyourFavGames;
+
+  const isAleradyExist = listOfyourFavGamesFromState.filter(item => item.id === id);
+
+  if (isAleradyExist.length === 0) {
+    listOfyourFavGamesFromState = listOfyourFavGamesFromState.concat(selectedGame);
+    return {
+      ...state,
+      listOfyourFavGames: listOfyourFavGamesFromState,
+    };
+  }
+
   return {
     ...state,
-    searchValue: action.referenceToSearchInput,
   };
 };
 
-const getDataAfterSearching = (state, action) => {
+const handleDeleteGameFromFavList = (state, action) => {
+  const { id } = action;
+
+  const { listOfyourFavGames } = state;
+  console.log(listOfyourFavGames);
+  const listOfyourFavGamesFromState = listOfyourFavGames;
+
+  const afterDeleteItemFromFavGame = listOfyourFavGamesFromState.filter(item => item.id !== id);
+
+  console.log(afterDeleteItemFromFavGame);
   return {
     ...state,
-    listOfGames: action.dataAfterSearching,
-    hasMoreDataToInfinityScroll: false,
+    listOfyourFavGames: afterDeleteItemFromFavGame,
   };
 };
 
@@ -104,6 +142,10 @@ const rootReducer = (state = initialState, action) => {
       return setSearchValueToState(state, action);
     case actionTypes.GET_DATA_AFTER_SEARCHING:
       return getDataAfterSearching(state, action);
+    case actionTypes.HANDLE_ADD_GAME_TO_FAV_LIST:
+      return hanldeAddGameToFavList(state, action);
+    case actionTypes.HANDLE_DELETE_GAME_FROM_FAV_LIST:
+      return handleDeleteGameFromFavList(state, action);
     default:
       return state;
   }

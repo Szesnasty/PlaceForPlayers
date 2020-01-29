@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from 'components/Card/Card.module.scss';
 import { Link } from 'react-router-dom';
 
