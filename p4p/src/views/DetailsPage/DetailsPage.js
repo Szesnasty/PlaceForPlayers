@@ -17,9 +17,11 @@ class DetailsPage extends Component {
   }
 
   getDataOfSingleGame = () => {
+    // eslint-disable-next-line react/destructuring-assignment
     axios.get(`https://api.rawg.io/api/games/${this.props.match.params.id}`).then(response => {
       const gameDetails = response.data;
       this.setState({
+        // eslint-disable-next-line react/no-unused-state
         gameDetails,
       });
     });

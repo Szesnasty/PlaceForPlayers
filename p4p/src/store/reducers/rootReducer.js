@@ -24,13 +24,6 @@ const initGamesListSuccess = (state, action) => {
   };
 };
 
-// const initGamesListFailed = (state, action) => {
-//   return {
-//     ...state,
-//     error: action.error,
-//   };
-// };
-
 const fetchMoreGamesSuccess = (state, action) => {
   return {
     ...state,
