@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
@@ -16,6 +18,7 @@ class Modal extends Component {
     playVideo: false,
   };
 
+  // eslint-disable-next-line react/destructuring-assignment
   modalRef = this.props.modalRef;
 
   componentDidMount() {
@@ -34,10 +37,11 @@ class Modal extends Component {
 
   render() {
     const { playVideo } = this.state;
-    const { onClick, addFavGame, modalContent, onHanldeAddGameToFavList } = this.props;
+    const { onClick, onHanldeAddGameToFavList, modalContent } = this.props;
 
     const selectedGame = modalContent[0];
 
+    // eslint-disable-next-line camelcase
     const { background_image, clip, id, name, genres } = selectedGame;
 
     const showGenereofGame = genres.map((type, index) => (
@@ -46,6 +50,7 @@ class Modal extends Component {
         {genres.length === index + 1 ? null : <span>, </span>}
       </span>
     ));
+
     return (
       <>
         <div ref={this.modalRef} onClick={onClick} className={styles.modalWrapper}>

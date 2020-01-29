@@ -1,8 +1,7 @@
 import React from 'react';
 
 import Card from 'components/Card/Card';
-
-import 'components/ListItems/ListItems.scss';
+import styles from 'components/ListItems/ListItems.module.scss';
 
 const ListItems = props => {
   const {
@@ -20,8 +19,7 @@ const ListItems = props => {
   } = props;
   return (
     <>
-      <li className="listItem">
-        {/* <Link target="_blank" to={`/details/${id}`}> */}
+      <li className={styles.listItem}>
         <Card
           backgroundImage={backgroundImage}
           clip={clip}
@@ -35,7 +33,6 @@ const ListItems = props => {
           handleDeleteGameFromFavList={handleDeleteGameFromFavList}
           released={released}
         />
-        {/* </Link> */}
       </li>
     </>
   );

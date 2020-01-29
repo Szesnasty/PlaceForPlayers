@@ -1,12 +1,11 @@
 import React from 'react';
 
 import ListItems from 'components/ListItems/ListItems';
-
 import 'components/List/List.scss';
 
 const List = props => {
-  const { data, onClick, wayOfDisplayingDetails, handleDeleteGameFromFavList } = props;
-  console.log(data);
+  const { data, handleDeleteGameFromFavList, onClick, wayOfDisplayingDetails } = props;
+
   const mappingByListItems = data.map(singleItem => (
     <ListItems
       backgroundImage={singleItem.background_image}

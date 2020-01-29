@@ -9,7 +9,6 @@ import ContentWrapper from 'components/ContentWrapper/ContentWrapper';
 import List from 'components/List/List';
 import Loading from 'components/Loading/Loading';
 import Modal from 'components/Modal/Modal';
-
 import Nav from 'components/Nav/Nav';
 
 const URLAPI = `https://api.rawg.io/api/`;
@@ -19,11 +18,7 @@ class Home extends Component {
     listOfyourFavGames: [],
   };
 
-  // PROBLEM Z REF NA BUTTONIE DO MODALA!!!
-
   modalRef = React.createRef();
-
-  addToFavBtnRef = React.createRef();
 
   searchInputRef = React.createRef();
 
@@ -42,6 +37,7 @@ class Home extends Component {
   componentDidUpdate(prevProps) {
     const { listOfyourFavGames } = this.props;
     if (listOfyourFavGames !== prevProps.listOfyourFavGames) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         listOfyourFavGames,
       });
@@ -64,8 +60,7 @@ class Home extends Component {
       hasMoreDataToInfinityScroll,
     } = this.props;
     const referenceToModal = this.modalRef;
-    const { addToFavBtnRef } = this;
-    console.log(addToFavBtnRef.current);
+
     return (
       <>
         <Wrapper>
@@ -92,7 +87,6 @@ class Home extends Component {
             modalRef={referenceToModal}
             onClick={e => onHandleHideModal(e, referenceToModal)}
             modalContent={modalContent}
-            addToFavBtnRef={addToFavBtnRef}
           />
         ) : null}
       </>

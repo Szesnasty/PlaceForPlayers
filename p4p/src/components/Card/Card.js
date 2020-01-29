@@ -1,17 +1,19 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from 'components/Card/Card.module.scss';
-import { Link } from 'react-router-dom';
 
 const Card = props => {
   const {
     backgroundImage,
+    handleDeleteGameFromFavList,
     id,
     name,
     onClick,
-    wayOfDisplayingDetails,
-    handleDeleteGameFromFavList,
     released,
+    wayOfDisplayingDetails,
   } = props;
 
   let bgAfterCrop = backgroundImage;

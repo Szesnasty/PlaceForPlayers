@@ -4,7 +4,6 @@ import facebookIcon from 'assets/facebook.png';
 import gitHubIcon from 'assets/github.png';
 import logoImage from 'assets/logo.png';
 
-console.log(logoImage);
 const MainHeader = () => {
   return (
     <header className={styles.mainHeader}>

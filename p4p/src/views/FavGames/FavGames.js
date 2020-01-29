@@ -15,9 +15,6 @@ class FavGames extends Component {
     const { onGetDataFromLocalStorage, listOfyourFavGames } = this.props;
     onGetDataFromLocalStorage();
 
-    // let listOfyourFavGames = localStorage.getItem('favGames');
-    // listOfyourFavGames = JSON.parse(listOfyourFavGames);
-
     this.setState({
       listOfFavGames: listOfyourFavGames,
     });
@@ -25,9 +22,9 @@ class FavGames extends Component {
 
   componentDidUpdate(prevProps) {
     const { listOfyourFavGames } = this.props;
-    console.log(listOfyourFavGames);
 
     if (listOfyourFavGames !== prevProps.listOfyourFavGames) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         listOfFavGames: listOfyourFavGames,
       });
@@ -42,7 +39,6 @@ class FavGames extends Component {
   render() {
     const { listOfFavGames } = this.state;
     const { onHandleDeleteGameFromFavList } = this.props;
-    console.log(listOfFavGames);
     return (
       <>
         <Nav />

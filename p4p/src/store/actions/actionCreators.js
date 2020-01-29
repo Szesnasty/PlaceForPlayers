@@ -29,7 +29,6 @@ export const initGamesList = (currentPage, pageSize, endpoint) => {
       .then(response => {
         const listOfGames = response.data.results;
         const msg = response.status;
-        console.log(listOfGames);
         dispatch(initGamesListSuccess(listOfGames, currentPage, msg));
       })
       .catch(error => {
@@ -54,16 +53,16 @@ export const fetchMoreGames = () => {
 
     const pageSize = 15;
     const fullURL = `${URLAPI}games?page=${nextPage}&page_size=${pageSize}`;
-    console.log(fullURL);
+
     axios
       .get(fullURL)
       .then(response => {
         const listOfGames = response.data.results;
-        console.log(listOfGames);
         const msg = response.status;
 
         dispatch(fetchMoreGamesSuccess(listOfGames, nextPage, msg));
       })
+      // eslint-disable-next-line no-unused-vars
       .catch(error => {
         // dispatch(initGamesListFailed(error));
       });

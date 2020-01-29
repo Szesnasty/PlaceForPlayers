@@ -24,12 +24,12 @@ const initGamesListSuccess = (state, action) => {
   };
 };
 
-const initGamesListFailed = (state, action) => {
-  return {
-    ...state,
-    error: action.error,
-  };
-};
+// const initGamesListFailed = (state, action) => {
+//   return {
+//     ...state,
+//     error: action.error,
+//   };
+// };
 
 const fetchMoreGamesSuccess = (state, action) => {
   return {
@@ -114,12 +114,10 @@ const handleDeleteGameFromFavList = (state, action) => {
   const { id } = action;
 
   const { listOfyourFavGames } = state;
-  console.log(listOfyourFavGames);
   const listOfyourFavGamesFromState = listOfyourFavGames;
 
   const afterDeleteItemFromFavGame = listOfyourFavGamesFromState.filter(item => item.id !== id);
 
-  console.log(afterDeleteItemFromFavGame);
   return {
     ...state,
     listOfyourFavGames: afterDeleteItemFromFavGame,
