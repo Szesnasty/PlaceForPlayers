@@ -67,10 +67,10 @@ const getDataAfterSearching = (state, action) => {
 };
 
 const getDataFromLocalStorage = state => {
-  let listOfyourFavGames = localStorage.getItem('favGames');
+  let listOfyourFavGames = localStorage.getItem('favGames') || [];
 
-  if (listOfyourFavGames === [] || listOfyourFavGames === null) {
-    listOfyourFavGames = localStorage.setItem('favGames', JSON.stringify([]));
+  if (listOfyourFavGames === []) {
+    listOfyourFavGames = localStorage.setItem('favGames', JSON.stringify(listOfyourFavGames));
   } else {
     listOfyourFavGames = JSON.parse(listOfyourFavGames);
   }

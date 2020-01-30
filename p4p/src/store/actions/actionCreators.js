@@ -108,9 +108,10 @@ export const handleSearch = (e, referenceToSearchInput) => {
     const timerForSearch = setTimeout(() => {
       if (searchInputFromRef !== '') {
         const { searchValue } = getState();
+        const searchValueAfterEncodeURI = encodeURIComponent(searchValue).replace(/%20/g, '+');
 
         if (searchValue === searchInputFromRef) {
-          const query = `https://api.rawg.io/api/games?search=${searchValue}&page_size=20&ordering=-rating`;
+          const query = `https://api.rawg.io/api/games?search=${searchValueAfterEncodeURI}&page_size=20`;
           axios.get(query).then(response => {
             const dataAfterSearching = response.data.results;
             dispatch(getDataAfterSearching(dataAfterSearching));
