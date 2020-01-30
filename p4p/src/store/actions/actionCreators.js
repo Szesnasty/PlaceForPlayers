@@ -53,19 +53,23 @@ export const fetchMoreGames = () => {
 
     const pageSize = 15;
     const fullURL = `${URLAPI}games?page=${nextPage}&page_size=${pageSize}`;
+    const timer = setTimeout(() => {
+      axios
+        .get(fullURL)
+        .then(response => {
+          const listOfGames = response.data.results;
+          const msg = response.status;
 
-    axios
-      .get(fullURL)
-      .then(response => {
-        const listOfGames = response.data.results;
-        const msg = response.status;
-
-        dispatch(fetchMoreGamesSuccess(listOfGames, nextPage, msg));
-      })
-      // eslint-disable-next-line no-unused-vars
-      .catch(error => {
-        // dispatch(initGamesListFailed(error));
-      });
+          dispatch(fetchMoreGamesSuccess(listOfGames, nextPage, msg));
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch(error => {
+          // dispatch(initGamesListFailed(error));
+        });
+    }, 1200);
+    return () => {
+      clearTimeout(timer);
+    };
   };
 };
 
