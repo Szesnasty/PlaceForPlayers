@@ -27,7 +27,7 @@ class Home extends Component {
     const { onInitGamesList, onGetDataFromLocalStorage } = this.props;
     const urlEndpoint = `${URLAPI}games`;
 
-    const pageSize = 20;
+    const pageSize = 21;
     const startPage = 1;
     onInitGamesList(startPage, pageSize, urlEndpoint);
 

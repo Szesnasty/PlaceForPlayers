@@ -51,7 +51,7 @@ export const fetchMoreGames = () => {
     const { currentPage } = getState();
     const nextPage = currentPage + 1;
 
-    const pageSize = 15;
+    const pageSize = 24;
     const fullURL = `${URLAPI}games?page=${nextPage}&page_size=${pageSize}`;
     const timer = setTimeout(() => {
       axios
