@@ -66,7 +66,7 @@ export const fetchMoreGames = () => {
         .catch(error => {
           // dispatch(initGamesListFailed(error));
         });
-    }, 1200);
+    }, 2000);
     return () => {
       clearTimeout(timer);
     };
