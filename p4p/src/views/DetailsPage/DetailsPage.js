@@ -28,6 +28,7 @@ class DetailsPage extends Component {
   };
 
   render() {
+    console.log(this.state.gameDetails);
     return (
       <>
         <Wrapper>

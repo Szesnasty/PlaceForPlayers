@@ -15,7 +15,7 @@
   animation-name: showPopup;
   animation-duration: 0, 5s;
   color: #425059;
-  z-index: 1;
+  z-index: 20;
 }
 
 .modalContent {
@@ -127,6 +127,7 @@
 }
 
 .addToFavBtn {
+  cursor: pointer;
   width: 60px;
   outline: none;
   padding: 0;
