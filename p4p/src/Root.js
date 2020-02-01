@@ -6,8 +6,6 @@ import Home from 'views/Home/Home';
 import DetailsPage from 'views/DetailsPage/DetailsPage';
 import FavGames from 'views/FavGames/FavGames';
 
-// https://api.rawg.io/docs/
-
 class Root extends Component {
   state = {};
 

@@ -58,7 +58,7 @@ class Modal extends Component {
             <h1 className={styles.modalContent__title}>{name}</h1>
 
             <div onClick={this.handlePlayVideo} className={styles.modalContent__videoWrapper}>
-              {playVideo && clip.clip !== null ? (
+              {playVideo && clip !== null ? (
                 <video className={styles.modalContent__video} autoPlay controls muted>
                   <source src={clip.clip} type="video/mp4" />
                   Your browser does not support the video tag.
