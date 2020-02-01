@@ -81,8 +81,16 @@ class Nav extends Component {
           </li>
 
           <li className={`${styles.MainNavList__item} ${styles.MainNavList__socialWrapper}`}>
-            <img className={styles.MainNavList__socialIcon} alt="facebook" src={facebookIcon} />
-            <img className={styles.MainNavList__socialIcon} alt="github" src={gitHubIcon} />
+            <a
+              className={styles.MainNavList__socialLink}
+              href="https://www.facebook.com/profile.php?id=100003788571383"
+            >
+              <img className={styles.MainNavList__socialIcon} alt="facebook" src={facebookIcon} />
+            </a>
+
+            <a className={styles.MainNavList__socialLink} href="https://github.com/Szesnasty">
+              <img className={styles.MainNavList__socialIcon} alt="github" src={gitHubIcon} />
+            </a>
           </li>
           <li className={styles.MainNavList__item}>{windowWidth > 768 ? SearchComponent : null}</li>
         </ul>
