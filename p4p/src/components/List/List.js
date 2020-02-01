@@ -22,7 +22,15 @@ const List = props => {
       released={singleItem.released}
     />
   ));
-  return <ul className="list">{mappingByListItems}</ul>;
+  return (
+    <ul className="list">
+      {data.length > 0 ? (
+        mappingByListItems
+      ) : (
+        <h2 className="list__msg">there is nothing here...</h2>
+      )}
+    </ul>
+  );
 };
 
 export default List;
