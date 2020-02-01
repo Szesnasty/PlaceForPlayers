@@ -12,4 +12,4 @@
 ###### npm install
 ###### npm start
 
-
+###### Since the application is not yet complete in case of a problem with its activation, just refresh the page after the first start!
