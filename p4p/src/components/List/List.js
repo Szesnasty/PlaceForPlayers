@@ -27,7 +27,9 @@ const List = props => {
       {data.length > 0 ? (
         mappingByListItems
       ) : (
-        <h2 className="list__msg">there is nothing here...</h2>
+        <h2 className="list__msg">
+          Nothing here yet... You can add your favorite games to this list
+        </h2>
       )}
     </ul>
   );
