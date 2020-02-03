@@ -11,6 +11,3 @@
 ###### cd p4p
 ###### npm install
 ###### npm start
-
-###### error is currently being worked on: a problem with data in local storage
-###### Since the application is not yet complete in case of a problem with its activation, just refresh the page after the first start!
